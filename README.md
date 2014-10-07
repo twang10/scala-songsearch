@@ -1,12 +1,12 @@
 # scala-songsearch
 
-This is me rewriting one of my Data Structure homework assignments from last semester in Scala, in order to learn Scala. I figured it would be a quick and easy exercise to practice writing and understanding Scala. It was originally done in C++.
+This is me rewriting one of my Data Structure homework assignments from last semester in Scala. I figured it would be a quick and easy exercise to practice writing and understanding Scala. It was originally done in C++.
 
-I'm mostly just trying to cover as many of (Odersky's Levels)[http://www.scala-lang.org/old/node/8610] as possible and level up.
+I'm mostly just trying to cover as many of [Odersky's Levels](http://www.scala-lang.org/old/node/8610) as possible and level up.
 
 ## What does it do?
 
-songsearch. opens a text file the user specifies which contains a formatted list of songs and their lyircs, and stores that into a simple data structure.
+Songsearch opens a text file the user specifies which contains a formatted list of songs and their lyircs, and stores that into a simple data structure.
 
 This program identifies a given word as an argument, and finds the top 10 songs with the most instances of that word in the lyrics. Each song is stored within a data structure that stores all information and lyrics of each song, and
 can recall information on that song almost after
