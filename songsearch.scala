@@ -1,9 +1,8 @@
-class Song(t: String, a: String, l: Array[String]) {
+class Song(t: String, a: String, l: String) {
 	val title: String = t
 	val artist: String = a
-	val lyrics = l
 	var word_count:Map[String, Int] = Map()
-
+	val lyrics:Array[String] = add_lyrics(l);
 
 	def count(word: String) {
 		/* Called .get here to return an option */
@@ -13,21 +12,29 @@ class Song(t: String, a: String, l: Array[String]) {
 		}
 	}
 
-	def add_lyrics(lyrics_input: String) {
-		
-		//lyrics = lyrics_input.split(" ")
-		//lyrics.map(word => count(word));
+	def add_lyrics(lyrics_input: String):Array[String] = {
+		val lyrics:Array[String] = lyrics_input.split(" ")
+		for (word <- lyrics) {
+			count(word)
+		}
+		return lyrics
+	}
+
+	def print_lyrics() {
+		for (word <- lyrics) {
+			println(word + " ")
+		}
+		println("\n")
 	}
 
 }
 
 // class Song_List {
-
 // }
 
 object songsearch {
-
 	def main(args: Array[String]) {
-
+		val lyrics = "Oh Yeah Oh Yeah Kanye Yeah"
+		val aSong = new Song("Good Problems", "Kanye", lyrics)
 	}
 }
