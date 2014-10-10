@@ -1,8 +1,8 @@
 import scala.io.Source
 
-class Song(t: String, a: String, l: String) {
-	val title: String = t
+class Song(a: String, t: String, l: String) {
 	val artist: String = a
+	val title: String = t
 	var word_count:Map[String, Int] = Map()
 	val lyrics:Array[String] = add_lyrics(l);
 
@@ -32,36 +32,34 @@ class Song(t: String, a: String, l: String) {
 }
 
 class Song_List(file_name: String) {
-	var songs:Array[Song] = read_data(file_name)
+	var songs:Vector[Song] = read_data(file_name)
 	var word_map:Map[String, Array[Int]] = Map()
-
-	def read_data(file_name: String):Array[Song] = {
+	
+	def read_data(file_name: String):Vector[Song] = {
 		val file = Source.fromFile(file_name).getLines.toArray
+		var songs_vector:Vector[Song] = Vector()
   	var i = 0
+  	
   	while (i < file.length) {
-  		
   		var artist = ""
   		artist += file(i)
   		i += 1
-  		println("artist: " + artist)
   		
   		var title = ""
   		title += file(i)
   		i += 1
-  		println("title: " + title)
   		
-  		var lyrics_body = ""
+  		var lyrics = ""
   		while (file(i) != "<BREAK>") {
-  			lyrics_body += file(i)
+  			lyrics += file(i)
   			i += 1
   		}
+
+  		val song_obj = new Song(artist, title, lyrics)
+  		songs_vector = songs_vector :+ song_obj
   		i += 1
-  		println("lyrics: " + lyrics_body + "\n")
-  		
   	}
-  	return new Array[Song](3)
-		
-		//TODO store in word_map		
+  	return songs_vector
 	}
 }
 
