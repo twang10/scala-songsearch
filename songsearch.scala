@@ -38,28 +38,28 @@ class Song_List(file_name: String) {
 	def read_data(file_name: String):Vector[Song] = {
 		val file = Source.fromFile(file_name).getLines.toArray
 		var songs_vector:Vector[Song] = Vector()
-  	var i = 0
-  	
-  	while (i < file.length) {
-  		var artist = ""
-  		artist += file(i)
-  		i += 1
-  		
-  		var title = ""
-  		title += file(i)
-  		i += 1
-  		
-  		var lyrics = ""
-  		while (file(i) != "<BREAK>") {
-  			lyrics += file(i)
-  			i += 1
-  		}
+		var i = 0
+		
+		while (i < file.length) {
+			var artist = ""
+			artist += file(i)
+			i += 1
+			
+			var title = ""
+			title += file(i)
+			i += 1
+			
+			var lyrics = ""
+			while (file(i) != "<BREAK>") {
+				lyrics += file(i)
+				i += 1
+			}
 
-  		val song_obj = new Song(artist, title, lyrics)
-  		songs_vector = songs_vector :+ song_obj
-  		i += 1
-  	}
-  	return songs_vector
+			val song_obj = new Song(artist, title, lyrics)
+			songs_vector = songs_vector :+ song_obj
+			i += 1
+		}
+		return songs_vector
 	}
 }
 
