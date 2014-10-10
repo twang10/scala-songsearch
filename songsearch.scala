@@ -38,11 +38,29 @@ class Song_List(file_name: String) {
 	def read_data(file_name: String):Array[Song] = {
 		val file = Source.fromFile(file_name).getLines.toArray
   	var i = 0
-  		//val artist = line;
   	while (i < file.length) {
+  		
+  		var artist = ""
+  		artist += file(i)
   		i += 1
+  		println("artist: " + artist)
+  		
+  		var title = ""
+  		title += file(i)
+  		i += 1
+  		println("title: " + title)
+  		
+  		var lyrics_body = ""
+  		while (file(i) != "<BREAK>") {
+  			lyrics_body += file(i)
+  			i += 1
+  		}
+  		i += 1
+  		println("lyrics: " + lyrics_body + "\n")
+  		
   	}
-		return new Array[Song](3)
+  	return new Array[Song](3)
+		
 		//TODO store in word_map		
 	}
 }
