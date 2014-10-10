@@ -36,9 +36,12 @@ class Song_List(file_name: String) {
 	var word_map:Map[String, Array[Int]] = Map()
 
 	def read_data(file_name: String):Array[Song] = {
-		for (line <- Source.fromFile(file_name).getLines()) {
-  		println(line)
-		}
+		val file = Source.fromFile(file_name).getLines.toArray
+  	var i = 0
+  		//val artist = line;
+  	while (i < file.length) {
+  		i += 1
+  	}
 		return new Array[Song](3)
 		//TODO store in word_map		
 	}
@@ -47,14 +50,13 @@ class Song_List(file_name: String) {
 object songsearch {
 	def main(args: Array[String]) {
 			
-		//val data = new Song_List(args(0))
-
+		val data = new Song_List(args(0))
 
 		val lyrics = "Oh Yeah Oh Yeah Kanye Yeah"
 		val aSong = new Song("Good Problems", "Kanye", lyrics)
 
-		println("Title: " + aSong.title + "\n")
-		println("Artist: " + aSong.artist + "\n")
+		println("Title: " + aSong.title)
+		println("Artist: " + aSong.artist)
 		println("Lyrics: "); aSong.print_lyrics()
 		println("Word Count: " + aSong.word_count.values + "")
 
