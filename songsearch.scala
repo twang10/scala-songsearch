@@ -35,32 +35,49 @@ class Song_List(file_name: String) {
 	var songs:Vector[Song] = read_data(file_name)
 	var word_map:Map[String, Array[Int]] = Map()
 	
+	// Reads songs in from file
 	def read_data(file_name: String):Vector[Song] = {
 		val file = Source.fromFile(file_name).getLines.toArray
 		var songs_vector:Vector[Song] = Vector()
 		var i = 0
 		
 		while (i < file.length) {
+			// Get Artist
 			var artist = ""
 			artist += file(i)
 			i += 1
-			
+			// Get Title
 			var title = ""
 			title += file(i)
 			i += 1
-			
+			// Get Lyrics array
 			var lyrics = ""
 			while (file(i) != "<BREAK>") {
 				lyrics += file(i)
 				i += 1
 			}
-
+			// Add song to song vector and map words
 			val song_obj = new Song(artist, title, lyrics)
 			songs_vector = songs_vector :+ song_obj
+			word_map = map_lyrics(song_obj.lyrics, songs_vector.length)
 			i += 1
 		}
 		return songs_vector
 	}
+	// TODO
+	def map_lyrics(lyrics: Array[String], location: Int) = {
+		for (word <- lyrics) {
+			if (word_map.get(word) == None) {
+				var location_array = new Array[Int](10)
+				location_array += location
+				word_map += (word <- location_array)
+			} else {
+				word_map(word) += location
+
+			}
+		}
+	}
+
 }
 
 object songsearch {
