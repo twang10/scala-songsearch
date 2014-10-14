@@ -32,8 +32,9 @@ class Song(a: String, t: String, l: String) {
 }
 
 class Song_List(file_name: String) {
-	var songs:Vector[Song] = read_data(file_name)
 	var word_map:Map[String, Array[Int]] = Map()
+	var songs:Vector[Song] = read_data(file_name)
+	
 	
 	// Reads songs in from file
 	def read_data(file_name: String):Vector[Song] = {
@@ -53,7 +54,9 @@ class Song_List(file_name: String) {
 			// Get Lyrics array
 			var lyrics = ""
 			while (file(i) != "<BREAK>") {
-				lyrics += file(i)
+				if (file(i) != " " && file(i) != "." && file(i) != "!" && file(i) != "?") {
+					lyrics += file(i)
+				}
 				i += 1
 			}
 			// Add song to song vector and map words
@@ -64,15 +67,16 @@ class Song_List(file_name: String) {
 		}
 		return songs_vector
 	}
-	// TODO
-	def map_lyrics(lyrics: Array[String], location: Int):Map[String, Array[Int]] = {
+	// TODO 
+	def map_lyrics(lyrics: Array[String], location: Int) {
 		for (word <- lyrics) {
 			if (word_map.get(word) == None) {
 				var location_array = new Array[Int](10)
-				location_array :+ location
+				location_array = location_array :+ location
 				word_map += (word -> location_array)
 			} else {
-				word_map(word) :+ location
+				var location_array = word_map(word) :+ location
+				word_map += (word -> location_array)
 			}
 		}
 	}
