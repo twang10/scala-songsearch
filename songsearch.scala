@@ -62,21 +62,24 @@ class Song_List(file_name: String) {
 			// Add song to song vector and map words
 			val song_obj = new Song(artist, title, lyrics)
 			songs_vector = songs_vector :+ song_obj
-			map_lyrics(song_obj.lyrics, songs_vector.length)
+			map_lyrics(song_obj.lyrics, songs_vector.length - 1)
 			i += 1
 		}
 		return songs_vector
 	}
-	// TODO 
+	// Maps song locations in vector for a given word
 	def map_lyrics(lyrics: Array[String], location: Int) {
 		for (word <- lyrics) {
 			if (word_map.get(word) == None) {
-				var location_array = new Array[Int](10)
+				var location_array = new Array[Int](0) // Empty Array
 				location_array = location_array :+ location
 				word_map += (word -> location_array)
 			} else {
-				var location_array = word_map(word) :+ location
-				word_map += (word -> location_array)
+				// Avoids duplicates
+				if (!word_map(word).contains(location)) {
+					var location_array = word_map(word) :+ location
+					word_map += (word -> location_array)
+				}
 			}
 		}
 	}
